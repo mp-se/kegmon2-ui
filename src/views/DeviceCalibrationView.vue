@@ -174,7 +174,7 @@ import {
 } from '@mp-se/espframework-ui-components'
 
 const state = ref(1)
-const scale = ref(1)
+const scale = ref(0)
 const weight = ref(0)
 const scaleStatus = ref({
   offset: 0,
