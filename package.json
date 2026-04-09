@@ -1,6 +1,7 @@
 {
   "name": "Kegmon",
   "version": "2.0.0",
+  "license": "GPL-3.0-or-later OR LicenseRef-Commercial",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +13,6 @@
     "mock": "./node_modules/nodemon/bin/nodemon.js mock-server/index.js"
   },
   "dependencies": {
-    "baseline-browser-mapping": "^2.9.12",
     "bootstrap": "^5.3.8",
     "chart.js": "^4.4.6",
     "chartjs-adapter-date-fns": "^3.0.0",
