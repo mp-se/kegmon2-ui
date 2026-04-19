@@ -418,9 +418,9 @@ export const useConfigStore = defineStore('config', {
       global.disabled = true
       logInfo('configStore.sendFilesystemRequest()', 'Sending /api/filesystem')
       try {
-        const text = await http.filesystemRequest(data)
-        logDebug('configStore.sendFilesystemRequest()', text)
-        return { success: true, text }
+        const result = await http.filesystemRequest(data)
+        logDebug('configStore.sendFilesystemRequest()', result)
+        return result
       } catch (err) {
         logError('configStore.sendFilesystemRequest()', err)
         return { success: false, text: '' }

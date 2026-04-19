@@ -195,6 +195,20 @@ vi.mock('@/modules/statusStore', () => ({
   }))
 }))
 
+// Mock eventStore used by many views
+// Mock eventStore used by many views (singleton so component and tests share same instance)
+const __fakeEventStore = {
+  events: [],
+  loading: false,
+  loadHistory: vi.fn(),
+  loadEvents: vi.fn(),
+  getFilteredEvents: vi.fn(() => []),
+  $state: {}
+}
+vi.mock('@/modules/eventStore', () => ({
+  useEventStore: vi.fn(() => __fakeEventStore)
+}))
+
 // Mock external dependencies (provide commonly used exports)
 vi.mock('@mp-se/espframework-ui-components', () => ({
   // logging
@@ -249,6 +263,8 @@ vi.mock('@mp-se/espframework-ui-components', () => ({
       if (handlers.onOpen) handlers.onOpen()
       return ws
     }),
+    restart: vi.fn(),
+    getErrorString: vi.fn((c) => `Error ${c}`),
     timeout: 10000
   },
 
@@ -331,15 +347,27 @@ uiStubs.forEach((name) => {
 })
 
 // Mock Chart.js to avoid canvas/context issues in JSDOM
-vi.mock('chart.js', () => ({
-  Chart: class {
+vi.mock('chart.js', () => {
+  const Chart = class {
     constructor(_ctx, _cfg) {
       this.ctx = null
       this.config = _cfg
     }
     update() {}
     destroy() {}
+    static register() {}
   }
-}))
+  return {
+    Chart,
+    CategoryScale: {},
+    LinearScale: {},
+    PointElement: {},
+    LineElement: {},
+    LineController: {},
+    Title: {},
+    Tooltip: {},
+    Legend: {}
+  }
+})
 
 vi.mock('chart.js/auto', () => ({}))

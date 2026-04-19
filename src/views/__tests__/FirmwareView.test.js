@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import FirmwareView from '../FirmwareView.vue'
 import { createPinia, setActivePinia } from 'pinia'
 import { sharedHttpClient as http } from '@mp-se/espframework-ui-components'
+import { global as globalMock } from '@/modules/pinia'
 
 // Mock the UI components library
 vi.mock('@mp-se/espframework-ui-components', () => ({
@@ -212,6 +213,23 @@ describe('FirmwareView (interaction tests)', () => {
     // Component displays device info including platform badge
     expect(wrapper.html()).toContain('badge')
     expect(wrapper.html()).toContain('Platform:')
+  })
+
+  it('renders hardware and firmware_file badges when set', () => {
+    globalMock.hardware = 'ESP32-S3'
+    globalMock.firmware_file = 'kegmon.bin'
+    const wrapper = mount(FirmwareView, {
+      global: {
+        stubs: {
+          BsFileUpload: true,
+          BsProgress: true
+        }
+      }
+    })
+    expect(wrapper.html()).toContain('ESP32-S3')
+    expect(wrapper.html()).toContain('kegmon.bin')
+    delete globalMock.hardware
+    delete globalMock.firmware_file
   })
 })
 

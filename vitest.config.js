@@ -18,7 +18,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: 'src/tests/setup.js',
     coverage: {
-      provider: 'istanbul',
+      provider: 'v8',
       include: ['src/**/*.{js,vue}'],
       exclude: [
         'src/tests/**',
