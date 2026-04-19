@@ -104,7 +104,12 @@ describe('IntBrewloggerView', () => {
     const wrapper = shallowMount(IntBrewloggerView, {
       global: {
         stubs: {
-          BsInputText: { name: 'BsInputText', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsInputText: {
+            name: 'BsInputText',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })

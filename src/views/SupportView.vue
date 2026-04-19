@@ -164,52 +164,53 @@
       <div class="col-md-12">
         Common HTTP error codes:
         <ul>
-        <li>
-          400 - Bad request. Probably an issue with the post format. Do a preview of the format to
-          identify the issue.
-        </li>
-        <li>
-          401 - Unauthorized. The service needs an token or other means to authenticate the device.
-        </li>
-        <li>403 - Forbidden. Could be an issue with token or URL.</li>
-        <li>404 - Not found. Probably a wrong URL.</li>
+          <li>
+            400 - Bad request. Probably an issue with the post format. Do a preview of the format to
+            identify the issue.
+          </li>
+          <li>
+            401 - Unauthorized. The service needs an token or other means to authenticate the
+            device.
+          </li>
+          <li>403 - Forbidden. Could be an issue with token or URL.</li>
+          <li>404 - Not found. Probably a wrong URL.</li>
         </ul>
         <br />
         MQTT connection errors:
         <ul>
-        <li>-1 - Connection refused</li>
-        <li>-2 - Send header failed</li>
-        <li>-3 - Send payload failed</li>
-        <li>-4 - Not connected</li>
-        <li>-5 - Connection lost</li>
-        <li>-6 - No stream</li>
-        <li>-7 - No HTTP server</li>
-        <li>-8 - Too little RAM available</li>
-        <li>-9 - Error encoding</li>
-        <li>-10 - Error writing to stream</li>
-        <li>-11 - Read timeout</li>
-        <li>-100 - Endpoint skipped since its SSL and the device is in gravity mode</li>
+          <li>-1 - Connection refused</li>
+          <li>-2 - Send header failed</li>
+          <li>-3 - Send payload failed</li>
+          <li>-4 - Not connected</li>
+          <li>-5 - Connection lost</li>
+          <li>-6 - No stream</li>
+          <li>-7 - No HTTP server</li>
+          <li>-8 - Too little RAM available</li>
+          <li>-9 - Error encoding</li>
+          <li>-10 - Error writing to stream</li>
+          <li>-11 - Read timeout</li>
+          <li>-100 - Endpoint skipped since its SSL and the device is in gravity mode</li>
         </ul>
         <br />
         MQTT push on topic errors:
-        <ul> 
-        <li>-1 - Buffer to short</li>
-        <li>-2 - Overflow</li>
-        <li>-3 - Network failed connected</li>
-        <li>-4 - Network timeout</li>
-        <li>-5 - Network read failed</li>
-        <li>-6 - Network write failed</li>
-        <li>-10 - Connection denied</li>
-        <li>-11 - Failed subscription</li>
+        <ul>
+          <li>-1 - Buffer to short</li>
+          <li>-2 - Overflow</li>
+          <li>-3 - Network failed connected</li>
+          <li>-4 - Network timeout</li>
+          <li>-5 - Network read failed</li>
+          <li>-6 - Network write failed</li>
+          <li>-10 - Connection denied</li>
+          <li>-11 - Failed subscription</li>
         </ul>
         <br />
         WIFI error codes
         <ul>
-        <li>1 - No SSID found.</li>
-        <li>4 - Connection failed.</li>
-        <li>5 - Connection lost.</li>
-        <li>6 - Wrong password.</li>
-        <li>7 - Disconnected by AP.</li>
+          <li>1 - No SSID found.</li>
+          <li>4 - Connection failed.</li>
+          <li>5 - Connection lost.</li>
+          <li>6 - Wrong password.</li>
+          <li>7 - Disconnected by AP.</li>
         </ul>
       </div>
     </div>

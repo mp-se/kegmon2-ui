@@ -13,7 +13,9 @@ const flush = () => new Promise((r) => setTimeout(r, 0))
 
 describe('DeviceStatisticsView', () => {
   beforeEach(() => {
-    http.getJson = vi.fn().mockResolvedValue({ level_statistics: [], scale_statistics: [], events: [] })
+    http.getJson = vi
+      .fn()
+      .mockResolvedValue({ level_statistics: [], scale_statistics: [], events: [] })
     global.disabled = false
   })
 
@@ -26,9 +28,8 @@ describe('DeviceStatisticsView', () => {
     http.getJson.mockResolvedValueOnce(sample)
 
     const origSetInterval = globalThis.setInterval
-    let captured = null
     vi.spyOn(globalThis, 'setInterval').mockImplementation((cb) => {
-      captured = cb
+      void cb
       return 42
     })
 

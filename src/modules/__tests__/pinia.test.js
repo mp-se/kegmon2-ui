@@ -122,7 +122,10 @@ describe('pinia', () => {
     it('snapshot is a deep copy — nested object mutation is detected', () => {
       // Find any object property in $state
       const objKey = Object.keys(config.$state).find(
-        (k) => config.$state[k] !== null && typeof config.$state[k] === 'object' && !Array.isArray(config.$state[k])
+        (k) =>
+          config.$state[k] !== null &&
+          typeof config.$state[k] === 'object' &&
+          !Array.isArray(config.$state[k])
       )
       if (objKey) {
         config[objKey] = { ...config[objKey], _test: 'before' }

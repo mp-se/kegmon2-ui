@@ -20,24 +20,24 @@ import { status } from '@/modules/pinia'
 // A helper that generates a valid 18-column CSV line
 const csvLine = (overrides = {}) => {
   const defaults = [
-    '1',           // version
+    '1', // version
     '2026-01-01T10:00:00', // timestamp
-    '0',           // scale
+    '0', // scale
     'pour_completed', // eventType
-    '10.50',       // stableWeight
-    '50',          // stableVolume
-    '11.00',       // prePourWeight
-    '10.50',       // postPourWeight
-    '0.50',        // pourWeight
-    '5.00',        // pourVolume
-    '3000',        // durationMs
-    '-0.12',       // avgSlope
-    '11.00',       // prevWeight
-    '10.50',       // currWeight
-    '',            // signalErrorReason
-    '95',          // signalQuality
-    '0.01',        // variance
-    '0'            // consecutiveErrors
+    '10.50', // stableWeight
+    '50', // stableVolume
+    '11.00', // prePourWeight
+    '10.50', // postPourWeight
+    '0.50', // pourWeight
+    '5.00', // pourVolume
+    '3000', // durationMs
+    '-0.12', // avgSlope
+    '11.00', // prevWeight
+    '10.50', // currWeight
+    '', // signalErrorReason
+    '95', // signalQuality
+    '0.01', // variance
+    '0' // consecutiveErrors
   ]
   const row = [...defaults]
   for (const [i, v] of Object.entries(overrides)) {
@@ -78,7 +78,7 @@ describe('eventStore', () => {
   it('getFilteredEvents returns all events when filter is "all"', () => {
     store.events = [
       { scale: 0, eventType: 'pour_completed', timestamp: '2026-01-01T10:00:00' },
-      { scale: 1, eventType: 'stable_level',   timestamp: '2026-01-01T09:00:00' }
+      { scale: 1, eventType: 'stable_level', timestamp: '2026-01-01T09:00:00' }
     ]
     expect(store.getFilteredEvents('all')).toHaveLength(2)
   })
@@ -86,8 +86,8 @@ describe('eventStore', () => {
   it('getFilteredEvents filters by scale number', () => {
     store.events = [
       { scale: 0, eventType: 'pour_completed', timestamp: '2026-01-01T10:00:00' },
-      { scale: 1, eventType: 'stable_level',   timestamp: '2026-01-01T09:00:00' },
-      { scale: 0, eventType: 'keg_removed',    timestamp: '2026-01-01T08:00:00' }
+      { scale: 1, eventType: 'stable_level', timestamp: '2026-01-01T09:00:00' },
+      { scale: 0, eventType: 'keg_removed', timestamp: '2026-01-01T08:00:00' }
     ]
     const filtered = store.getFilteredEvents('0')
     expect(filtered).toHaveLength(2)
@@ -126,16 +126,16 @@ describe('eventStore', () => {
   it('loadEvents skips files that throw (file not found)', async () => {
     // First file succeeds, rest throw
     const mockResponse = { text: vi.fn().mockResolvedValue(csvLine()) }
-    http.request
-      .mockResolvedValueOnce(mockResponse)
-      .mockRejectedValue(new Error('not found'))
+    http.request.mockResolvedValueOnce(mockResponse).mockRejectedValue(new Error('not found'))
     const result = await store.loadEvents()
     expect(result).toBe(true)
     expect(store.events).toHaveLength(1)
   })
 
   it('loadEvents returns false when top-level error occurs', async () => {
-    http.request.mockImplementation(() => { throw new Error('fatal') })
+    http.request.mockImplementation(() => {
+      throw new Error('fatal')
+    })
     // Surround with try-catch to simulate the outer try failing
     // We need to make the first await throw synchronously - use mockRejectedValue isn't enough
     // Instead, mock the entire loadEvents internals by making status.sd_mounted true but request blow up
@@ -181,7 +181,7 @@ describe('eventStore', () => {
   })
 
   it('_parseCsv skips lines with wrong column count', () => {
-    const csv = '1,2026-01-01,0,pour_completed'  // only 4 cols
+    const csv = '1,2026-01-01,0,pour_completed' // only 4 cols
     const events = store._parseCsv(csv)
     expect(events).toHaveLength(0)
   })
@@ -193,13 +193,13 @@ describe('eventStore', () => {
   })
 
   it('_parseCsv skips lines with missing timestamp', () => {
-    const csv = csvLine({ 1: '' })   // empty timestamp
+    const csv = csvLine({ 1: '' }) // empty timestamp
     const events = store._parseCsv(csv)
     expect(events).toHaveLength(0)
   })
 
   it('_parseCsv skips lines with missing eventType', () => {
-    const csv = csvLine({ 3: '' })   // empty eventType
+    const csv = csvLine({ 3: '' }) // empty eventType
     const events = store._parseCsv(csv)
     expect(events).toHaveLength(0)
   })

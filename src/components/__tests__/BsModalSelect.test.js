@@ -47,12 +47,3 @@ describe('BsModalSelect', () => {
     expect(cb).toHaveBeenCalledWith(false, '')
   })
 })
-import { shallowMount } from '@vue/test-utils'
-import BsModalSelect from '@/components/BsModalSelect.vue'
-
-describe('BsModalSelect', () => {
-  it('mounts', () => {
-    const wrapper = shallowMount(BsModalSelect)
-    expect(wrapper.exists()).toBe(true)
-  })
-})

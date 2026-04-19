@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import {
-  weightKgToLbs,
-  weightLbsToKg,
-  volumeCLtoUSOZ,
-  volumeCLtoUKOZ
-} from '../utils'
+import { weightKgToLbs, weightLbsToKg, volumeCLtoUSOZ, volumeCLtoUKOZ } from '../utils'
 
 describe('utils', () => {
   // --- weightKgToLbs ---

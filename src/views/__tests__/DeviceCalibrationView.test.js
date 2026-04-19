@@ -50,10 +50,7 @@ describe('DeviceCalibrationView', () => {
     wrapper.vm.scale = 1
 
     const json = {
-      scales: [
-        {},
-        { scale_offset: 5, scale_factor: 2, scale_raw: 123, stable_weight: 3.141 }
-      ]
+      scales: [{}, { scale_offset: 5, scale_factor: 2, scale_raw: 123, stable_weight: 3.141 }]
     }
 
     wrapper.vm.saveScaleValues(json)
@@ -72,7 +69,7 @@ describe('DeviceCalibrationView', () => {
     vi.spyOn(http, 'postJson').mockResolvedValue({})
     vi.spyOn(http, 'getJson').mockResolvedValueOnce({
       scale_busy: false,
-      scales: [ {}, { scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 2 } ]
+      scales: [{}, { scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 2 }]
     })
 
     await wrapper.vm.step2()
@@ -105,7 +102,10 @@ describe('DeviceCalibrationView', () => {
     vi.spyOn(http, 'postJson').mockResolvedValue({})
     vi.spyOn(http, 'getJson').mockResolvedValueOnce({
       scale_busy: false,
-      scales: [ {}, { state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 2.5 } ]
+      scales: [
+        {},
+        { state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 2.5 }
+      ]
     })
 
     await wrapper.vm.step3()
@@ -156,7 +156,9 @@ describe('DeviceCalibrationView', () => {
     vi.spyOn(http, 'postJson').mockResolvedValue({})
     vi.spyOn(http, 'getJson').mockResolvedValue({
       scale_busy: false,
-      scales: [{ state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 1 }]
+      scales: [
+        { state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 1 }
+      ]
     })
     const wrapper = shallowMount(DeviceCalibrationView)
     wrapper.vm.state = 3
@@ -181,7 +183,9 @@ describe('DeviceCalibrationView', () => {
       .mockResolvedValueOnce({ scale_busy: true, scales: [{}] })
       .mockResolvedValueOnce({
         scale_busy: false,
-        scales: [{ state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 1 }]
+        scales: [
+          { state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 1 }
+        ]
       })
 
     const p = wrapper.vm.step2()
@@ -216,7 +220,9 @@ describe('DeviceCalibrationView', () => {
       .mockResolvedValueOnce({ scale_busy: true, scales: [{}] })
       .mockResolvedValueOnce({
         scale_busy: false,
-        scales: [{ state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 2.5 }]
+        scales: [
+          { state: 'Stable', scale_offset: 1, scale_factor: 1, scale_raw: 0, stable_weight: 2.5 }
+        ]
       })
 
     const p = wrapper.vm.step3()

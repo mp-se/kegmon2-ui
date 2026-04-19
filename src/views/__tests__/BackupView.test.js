@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import BackupView from '@/views/BackupView.vue'
-import { global, config, getConfigChanges } from '@/modules/pinia'
+import { global, config } from '@/modules/pinia'
 
 describe('BackupView', () => {
   beforeEach(() => {
@@ -58,7 +58,10 @@ describe('BackupView', () => {
     const getSpy = vi.spyOn(document, 'getElementById').mockReturnValue(el)
 
     // mock FileReader to synchronously invoke load with v1 payload
-    const payload = JSON.stringify({ meta: { software: 'KegMon', version: '1.0.0' }, config: { foo: 'bar' } })
+    const payload = JSON.stringify({
+      meta: { software: 'KegMon', version: '1.0.0' },
+      config: { foo: 'bar' }
+    })
     const mockReader = {
       addEventListener(evt, cb) {
         if (evt === 'load') this._cb = cb

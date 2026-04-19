@@ -22,6 +22,24 @@ export default [
     },
   },
 
+  {
+    name: 'app/test-files',
+    files: ['**/__tests__/**/*.{js,mjs}', '**/tests/**/*.{js,mjs}', '**/*.test.{js,mjs}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        vi: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+      },
+    },
+  },
+
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
   skipFormatting,

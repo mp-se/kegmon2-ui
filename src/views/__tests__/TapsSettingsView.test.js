@@ -1,4 +1,3 @@
-
 // Provide safe status store shape before importing
 vi.mock('@/modules/statusStore', () => ({
   useStatusStore: vi.fn(() => ({
@@ -76,12 +75,24 @@ describe('TapsSettingsView', () => {
 
   it('v-model setters update config.scales when BsSelect emits update:modelValue', async () => {
     config.scales = [
-      { keg_volume: 0, temp_sensor_id: '', keg_weight: 0, glass_volume: 0, scale_factor: 0, scale_offset: 0 }
+      {
+        keg_volume: 0,
+        temp_sensor_id: '',
+        keg_weight: 0,
+        glass_volume: 0,
+        scale_factor: 0,
+        scale_offset: 0
+      }
     ]
     const wrapper = shallowMount(TapsSettingsView, {
       global: {
         stubs: {
-          BsSelect: { name: 'BsSelect', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsSelect: {
+            name: 'BsSelect',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })

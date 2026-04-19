@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { createPinia, setActivePinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia' // eslint-disable-line no-unused-vars
 
 // Mock @/modules/pinia to provide controlled config and status instances
 vi.mock('@/modules/pinia', () => ({
@@ -119,9 +119,9 @@ describe('badge', () => {
 
   // --- deviceBadge ---
   it('deviceBadge returns sum of all sub-badges', () => {
-    config.mdns = ''       // +1
-    config.wifi_ssid = ''  // +1 (wifi badge)
-    status.scales = [{ scale_factor: 0 }]  // +1
+    config.mdns = '' // +1
+    config.wifi_ssid = '' // +1 (wifi badge)
+    status.scales = [{ scale_factor: 0 }] // +1
     // hardware always 0
     const total = deviceBadge()
     expect(total).toBeGreaterThanOrEqual(2)

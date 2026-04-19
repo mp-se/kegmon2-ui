@@ -6,12 +6,19 @@ describe('HomeView', () => {
   beforeEach(() => {
     // reset mock stores
     status.scales = [
-      { stable_volume: 5, keg_volume: 20, glass: 0.5, sampling_rate: 80, stable_weight: 2, last_pour_volume: 0.5 },
+      {
+        stable_volume: 5,
+        keg_volume: 20,
+        glass: 0.5,
+        sampling_rate: 80,
+        stable_weight: 2,
+        last_pour_volume: 0.5
+      },
       { stable_volume: 2, keg_volume: 10, glass: 0.33, sampling_rate: 10, stable_weight: 1 }
     ]
     status.sensors = [{ id: 't1', temperature: 12.3 }]
-    status.getLastEventsForScale = (idx, n) => [{ name: 'pouring', timestamp_ms: Date.now() - 1000 }]
-    status.getRelativeTime = (ts) => 'just now'
+    status.getLastEventsForScale = () => [{ name: 'pouring', timestamp_ms: Date.now() - 1000 }]
+    status.getRelativeTime = () => 'just now'
 
     config.beers = [{ beer_name: 'A', beer_abv: 5, beer_ebc: 10, beer_ibu: 20 }, { beer_name: 'B' }]
     config.scales = [{ temp_sensor_id: 't1' }, {}]
@@ -99,7 +106,13 @@ describe('HomeView', () => {
     status.ha = { push_used: true, push_age: 5000, push_status: true }
     status.brewspy = { push_used: true, push_age: 2000, push_status: false, push_code: 12 }
     status.brewlogger = { push_used: true, push_age: 3000, push_status: true }
-    status.barhelper = { push_used: true, push_age: 3000, push_status: false, push_code: 7, push_response: '{"message":"ok"}' }
+    status.barhelper = {
+      push_used: true,
+      push_age: 3000,
+      push_status: false,
+      push_code: 7,
+      push_response: '{"message":"ok"}'
+    }
     const wrapper = shallowMount(HomeView)
     expect(wrapper.vm.pushHomeAssistant).toMatch(/Updated 5s ago/)
     expect(wrapper.vm.pushBrewspy).toMatch(/Failed, error 12/)
@@ -108,7 +121,13 @@ describe('HomeView', () => {
   })
 
   it('pushBarhelper handles malformed payloads without throwing', () => {
-    status.barhelper = { push_used: true, push_age: 2000, push_status: false, push_code: 7, push_response: 'not-json' }
+    status.barhelper = {
+      push_used: true,
+      push_age: 2000,
+      push_status: false,
+      push_code: 7,
+      push_response: 'not-json'
+    }
     const wrapper = shallowMount(HomeView)
     expect(wrapper.vm.pushBarhelper).toContain('Failed')
   })
@@ -116,10 +135,16 @@ describe('HomeView', () => {
   it('pushBarhelper fixes payloads containing broken volume field', () => {
     // craft a payload that matches the broken pattern: contains '"volume:' and '"\n'
     const broken = '{"message":"x","volume:1.23"\n}'
-    status.barhelper = { push_used: true, push_age: 12000, push_status: true, push_code: 0, push_response: broken }
+    status.barhelper = {
+      push_used: true,
+      push_age: 12000,
+      push_status: true,
+      push_code: 0,
+      push_response: broken
+    }
     const wrapper = shallowMount(HomeView)
     // should return a string containing 'Updated' and not throw
-    expect(wrapper.vm.pushBarhelper).toMatch(/Updated/) 
+    expect(wrapper.vm.pushBarhelper).toMatch(/Updated/)
   })
 
   it('getLastEvents and getRelativeTime proxy to status helpers', () => {

@@ -125,7 +125,12 @@ describe('IntInfluxdbView', () => {
     const wrapper = shallowMount(IntInfluxdbView, {
       global: {
         stubs: {
-          BsInputText: { name: 'BsInputText', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsInputText: {
+            name: 'BsInputText',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })

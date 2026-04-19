@@ -88,12 +88,14 @@ describe('App.vue unit', () => {
     const saveState = vi.spyOn(piniaModule, 'saveConfigState').mockImplementation(vi.fn())
 
     // stub spinner DOM to avoid errors
-    const qSpy = vi.spyOn(document, 'querySelector').mockReturnValue({ showModal: vi.fn(), close: vi.fn() })
+    const qSpy = vi
+      .spyOn(document, 'querySelector')
+      .mockReturnValue({ showModal: vi.fn(), close: vi.fn() })
     const setSpy = vi.spyOn(document.documentElement, 'setAttribute')
 
     // allow initialize to run
     global.initialized = false
-    const wrapper = shallowMount(App, { global: { plugins: [pinia] } })
+    shallowMount(App, { global: { plugins: [pinia] } })
 
     // wait for mounted hook to finish
     await new Promise((r) => setTimeout(r, 0))
@@ -116,10 +118,12 @@ describe('App.vue unit', () => {
   it('initializeApp handles auth failure', async () => {
     const pinia = createTestingPinia()
     http.auth.mockResolvedValue(false)
-    const qSpy = vi.spyOn(document, 'querySelector').mockReturnValue({ showModal: vi.fn(), close: vi.fn() })
+    const qSpy = vi
+      .spyOn(document, 'querySelector')
+      .mockReturnValue({ showModal: vi.fn(), close: vi.fn() })
 
     global.initialized = false
-    const wrapper = shallowMount(App, { global: { plugins: [pinia] } })
+    shallowMount(App, { global: { plugins: [pinia] } })
     await Promise.resolve()
     expect(global.messageError).toMatch(/Failed to authenticate/)
     qSpy.mockRestore()

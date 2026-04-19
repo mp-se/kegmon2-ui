@@ -22,7 +22,7 @@ vi.mock('@/modules/pinia', () => ({
   getConfigChanges: vi.fn(() => ({}))
 }))
 
-import { global, saveConfigState, getConfigChanges } from '@/modules/pinia'
+import { global, getConfigChanges } from '@/modules/pinia'
 
 const makeMockConfig = () => ({
   id: 'abc',
@@ -64,10 +64,38 @@ const makeMockConfig = () => ({
   mqtt_user: 'mqttuser',
   mqtt_pass: 'mqttpass',
   scales: [
-    { scale_factor: 1, scale_offset: 0, keg_weight: 10, keg_volume: 20, glass_volume: 0.5, temp_sensor_id: 's1' },
-    { scale_factor: 2, scale_offset: 0, keg_weight: 10, keg_volume: 20, glass_volume: 0.5, temp_sensor_id: 's2' },
-    { scale_factor: 3, scale_offset: 0, keg_weight: 10, keg_volume: 20, glass_volume: 0.5, temp_sensor_id: 's3' },
-    { scale_factor: 4, scale_offset: 0, keg_weight: 10, keg_volume: 20, glass_volume: 0.5, temp_sensor_id: 's4' }
+    {
+      scale_factor: 1,
+      scale_offset: 0,
+      keg_weight: 10,
+      keg_volume: 20,
+      glass_volume: 0.5,
+      temp_sensor_id: 's1'
+    },
+    {
+      scale_factor: 2,
+      scale_offset: 0,
+      keg_weight: 10,
+      keg_volume: 20,
+      glass_volume: 0.5,
+      temp_sensor_id: 's2'
+    },
+    {
+      scale_factor: 3,
+      scale_offset: 0,
+      keg_weight: 10,
+      keg_volume: 20,
+      glass_volume: 0.5,
+      temp_sensor_id: 's3'
+    },
+    {
+      scale_factor: 4,
+      scale_offset: 0,
+      keg_weight: 10,
+      keg_volume: 20,
+      glass_volume: 0.5,
+      temp_sensor_id: 's4'
+    }
   ],
   beers: [
     { beer_name: 'IPA', beer_id: 'b1', beer_abv: 5.5, beer_fg: 1.01, beer_ebc: 8, beer_ibu: 40 },
@@ -392,14 +420,20 @@ describe('configStore', () => {
 
   // --- restart action ---
   it('restart sets messageSuccess when res.success and res.json.status is true', async () => {
-    http.restart.mockResolvedValueOnce({ success: true, json: { status: true, message: 'Restarting' } })
+    http.restart.mockResolvedValueOnce({
+      success: true,
+      json: { status: true, message: 'Restarting' }
+    })
     store.mdns = 'kegmon'
     await store.restart()
     expect(global.messageSuccess).toContain('Redirecting to http://kegmon.local')
   })
 
   it('restart sets messageError from json.message when res.success but status is not true', async () => {
-    http.restart.mockResolvedValueOnce({ success: true, json: { status: false, message: 'Not ready' } })
+    http.restart.mockResolvedValueOnce({
+      success: true,
+      json: { status: false, message: 'Not ready' }
+    })
     await store.restart()
     expect(global.messageError).toBe('Not ready')
   })
@@ -463,7 +497,12 @@ describe('configStore', () => {
   it('runPushTest sets messageError when push test fails with error code', async () => {
     vi.useFakeTimers()
     http.postJson.mockResolvedValueOnce({})
-    http.getJson.mockResolvedValueOnce({ status: false, success: false, push_enabled: true, last_error: 5 })
+    http.getJson.mockResolvedValueOnce({
+      status: false,
+      success: false,
+      push_enabled: true,
+      last_error: 5
+    })
     http.getErrorString = vi.fn(() => 'Error 5')
     const promise = store.runPushTest({})
     await vi.runAllTimersAsync()

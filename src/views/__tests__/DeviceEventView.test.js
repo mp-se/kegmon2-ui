@@ -26,7 +26,7 @@ describe('DeviceEventView', () => {
     const ts = new Date('2020-01-02T03:04:05Z').getTime()
     // timezone differences may apply, so only check structure
     const out = wrapper.vm.formatTimestamp(ts)
-    expect(out).toMatch(/2020-01-02/) 
+    expect(out).toMatch(/2020-01-02/)
     expect(out).toMatch(/03:04:05|04:04:05|02:04:05/)
   })
 
@@ -57,36 +57,72 @@ describe('DeviceEventView', () => {
   it('formatEventDetails covers several event types', () => {
     const wrapper = shallowMount(DeviceEventView)
 
-    expect(wrapper.vm.formatEventDetails({ eventType: 'SYSTEM_STARTUP' })).toBe('System initialization')
-    expect(wrapper.vm.formatEventDetails({ eventType: 'SETTLING_STARTED', currWeight: 1.5 })).toContain(
-      'Settling started'
+    expect(wrapper.vm.formatEventDetails({ eventType: 'SYSTEM_STARTUP' })).toBe(
+      'System initialization'
     )
     expect(
-      wrapper.vm.formatEventDetails({ eventType: 'STABLE_LEVEL', stableWeight: 2.0, stableVolume: 1.2, durationMs: 500 })
-    ).toContain('Stable')
-    expect(wrapper.vm.formatEventDetails({ eventType: 'POURING', prePourWeight: 0.5 })).toContain('Started at')
+      wrapper.vm.formatEventDetails({ eventType: 'SETTLING_STARTED', currWeight: 1.5 })
+    ).toContain('Settling started')
     expect(
-      wrapper.vm.formatEventDetails({ eventType: 'WEIGHT_CHANGE_DETECTED', prevWeight: 1, currWeight: 1.2, variance: 0.01 })
+      wrapper.vm.formatEventDetails({
+        eventType: 'STABLE_LEVEL',
+        stableWeight: 2.0,
+        stableVolume: 1.2,
+        durationMs: 500
+      })
+    ).toContain('Stable')
+    expect(wrapper.vm.formatEventDetails({ eventType: 'POURING', prePourWeight: 0.5 })).toContain(
+      'Started at'
+    )
+    expect(
+      wrapper.vm.formatEventDetails({
+        eventType: 'WEIGHT_CHANGE_DETECTED',
+        prevWeight: 1,
+        currWeight: 1.2,
+        variance: 0.01
+      })
     ).toContain('Weight change')
     expect(
       wrapper.vm.formatEventDetails({ eventType: 'KEG_REMOVED', prevWeight: 2, currWeight: 0 })
     ).toContain('Removed')
     expect(
-      wrapper.vm.formatEventDetails({ eventType: 'KEG_ABSENT_TIMEOUT', durationMs: 2000, currWeight: 0 })
+      wrapper.vm.formatEventDetails({
+        eventType: 'KEG_ABSENT_TIMEOUT',
+        durationMs: 2000,
+        currWeight: 0
+      })
     ).toContain('Absent')
-    expect(wrapper.vm.formatEventDetails({ eventType: 'INVALID_WEIGHT' })).toBe('Sensor reading out of range')
+    expect(wrapper.vm.formatEventDetails({ eventType: 'INVALID_WEIGHT' })).toBe(
+      'Sensor reading out of range'
+    )
     expect(
-      wrapper.vm.formatEventDetails({ eventType: 'LOAD_CELL_ERROR', signalErrorReason: 'sig', signalQuality: 90, consecutiveErrors: 2, variance: 0.002 })
+      wrapper.vm.formatEventDetails({
+        eventType: 'LOAD_CELL_ERROR',
+        signalErrorReason: 'sig',
+        signalQuality: 90,
+        consecutiveErrors: 2,
+        variance: 0.002
+      })
     ).toContain('Quality')
     expect(
-      wrapper.vm.formatEventDetails({ eventType: 'LOAD_CELL_RECOVERED', signalQuality: 80, variance: 0.001 })
+      wrapper.vm.formatEventDetails({
+        eventType: 'LOAD_CELL_RECOVERED',
+        signalQuality: 80,
+        variance: 0.001
+      })
     ).toContain('Quality')
-    expect(wrapper.vm.formatEventDetails({ eventType: 'SENSOR_RECOVERED', currWeight: 1 })).toContain('Recovered at')
-    expect(wrapper.vm.formatEventDetails({ eventType: 'CALIBRATION_NEEDED' })).toBe('Scale calibration required')
+    expect(
+      wrapper.vm.formatEventDetails({ eventType: 'SENSOR_RECOVERED', currWeight: 1 })
+    ).toContain('Recovered at')
+    expect(wrapper.vm.formatEventDetails({ eventType: 'CALIBRATION_NEEDED' })).toBe(
+      'Scale calibration required'
+    )
     expect(wrapper.vm.formatEventDetails({ eventType: 'CALIBRATION_COMPLETE' })).toBe(
       'Scale calibration completed successfully'
     )
-    expect(wrapper.vm.formatEventDetails({ eventType: 'DISABLED' })).toBe('Scale unit disabled (ADC hardware not found)')
+    expect(wrapper.vm.formatEventDetails({ eventType: 'DISABLED' })).toBe(
+      'Scale unit disabled (ADC hardware not found)'
+    )
     expect(wrapper.vm.formatEventDetails({ eventType: 'SOME_UNKNOWN' })).toBe('Unknown event type')
   })
 
@@ -105,11 +141,15 @@ describe('DeviceEventView', () => {
       wrapper.vm.formatEventDetails({ eventType: 'KEG_REPLACED', prevWeight: 2, currWeight: 3 })
     ).toContain('Replaced')
     expect(
-      wrapper.vm.formatEventDetails({ eventType: 'KEG_ABSENT_TIMEOUT', durationMs: 2000, currWeight: 1.5 })
+      wrapper.vm.formatEventDetails({
+        eventType: 'KEG_ABSENT_TIMEOUT',
+        durationMs: 2000,
+        currWeight: 1.5
+      })
     ).toContain('Current')
-    expect(
-      wrapper.vm.formatEventDetails({ eventType: 'SENSOR_RECOVERED', currWeight: 0 })
-    ).toBe('Sensor recovered')
+    expect(wrapper.vm.formatEventDetails({ eventType: 'SENSOR_RECOVERED', currWeight: 0 })).toBe(
+      'Sensor recovered'
+    )
   })
 
   it('loadEvents handles exception from eventStore.loadEvents', async () => {

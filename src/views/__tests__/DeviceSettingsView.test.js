@@ -153,8 +153,18 @@ describe('DeviceSettingsView', () => {
     const wrapper = shallowMount(DeviceSettingsView, {
       global: {
         stubs: {
-          BsInputText: { name: 'BsInputText', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] },
-          BsInputRadio: { name: 'BsInputRadio', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsInputText: {
+            name: 'BsInputText',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          },
+          BsInputRadio: {
+            name: 'BsInputRadio',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })
@@ -175,7 +185,9 @@ describe('DeviceSettingsView', () => {
   it('clicking factory button triggers factory function', async () => {
     http.getJson = vi.fn().mockResolvedValue({ success: false, message: 'fail' })
     const wrapper = shallowMount(DeviceSettingsView)
-    const factoryBtn = wrapper.findAll('button[type="button"]').find((b) => b.text().includes('factory') || b.text().includes('Restore'))
+    const factoryBtn = wrapper
+      .findAll('button[type="button"]')
+      .find((b) => b.text().includes('factory') || b.text().includes('Restore'))
     if (factoryBtn) {
       await factoryBtn.trigger('click')
       expect(http.getJson).toHaveBeenCalled()

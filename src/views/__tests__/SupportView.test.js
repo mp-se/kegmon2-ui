@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import SupportView from '@/views/SupportView.vue'
-import { global, config, status } from '@/modules/pinia'
+import { global, config } from '@/modules/pinia'
 
 describe('SupportView', () => {
   beforeEach(() => {
@@ -52,13 +52,5 @@ describe('SupportView', () => {
     expect(wrapper.vm.showHelp).toBe(false)
     wrapper.vm.showHelp = true
     expect(wrapper.vm.showHelp).toBe(true)
-  })
-})
-import SupportView from '@/views/SupportView.vue'
-
-describe('SupportView', () => {
-  it('mounts', () => {
-    const wrapper = shallowMount(SupportView)
-    expect(wrapper.exists()).toBe(true)
   })
 })

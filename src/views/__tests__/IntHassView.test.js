@@ -114,8 +114,18 @@ describe('IntHassView', () => {
     const wrapper = shallowMount(IntHassView, {
       global: {
         stubs: {
-          BsInputText: { name: 'BsInputText', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] },
-          BsInputNumber: { name: 'BsInputNumber', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsInputText: {
+            name: 'BsInputText',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          },
+          BsInputNumber: {
+            name: 'BsInputNumber',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })

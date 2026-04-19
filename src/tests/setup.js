@@ -1,6 +1,5 @@
 import { vi } from 'vitest'
 import { config as vtConfig } from '@vue/test-utils'
-import { ref } from 'vue'
 
 // Mock localStorage before anything else
 class LocalStorageMock {

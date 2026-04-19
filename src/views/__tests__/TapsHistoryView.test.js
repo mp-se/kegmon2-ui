@@ -28,8 +28,24 @@ describe('TapsHistoryView', () => {
   it('getPoursForScale filters and sorts events and converts volumes', () => {
     const store = useEventStore()
     store.events = [
-      { eventType: 'POUR_COMPLETED', scale: 1, timestamp: '2020-01-02T00:00:02Z', pourVolume: 0.5, pourWeight: 1, durationMs: 1000, avgSlope: 0 },
-      { eventType: 'POUR_COMPLETED', scale: 2, timestamp: '2020-01-02T00:00:03Z', pourVolume: 0.2, pourWeight: 0.5, durationMs: 500, avgSlope: 0 }
+      {
+        eventType: 'POUR_COMPLETED',
+        scale: 1,
+        timestamp: '2020-01-02T00:00:02Z',
+        pourVolume: 0.5,
+        pourWeight: 1,
+        durationMs: 1000,
+        avgSlope: 0
+      },
+      {
+        eventType: 'POUR_COMPLETED',
+        scale: 2,
+        timestamp: '2020-01-02T00:00:03Z',
+        pourVolume: 0.2,
+        pourWeight: 0.5,
+        durationMs: 500,
+        avgSlope: 0
+      }
     ]
     // default volume unit is cl
     config.isVolumeCl = true

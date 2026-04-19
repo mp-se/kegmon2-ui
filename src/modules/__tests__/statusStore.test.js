@@ -50,10 +50,42 @@ const makeStatusJson = () => ({
   uptime_days: 1,
   sd_mounted: true,
   scales: [
-    { scale_factor: 1, stable_weight: 10.5, stable_volume: 50.0, pouring_volume: 5.0, last_pour_volume: 3.0, keg_volume: 30.0, glass: 0.5 },
-    { scale_factor: 2, stable_weight: 8.0,  stable_volume: 40.0, pouring_volume: 4.0, last_pour_volume: 2.0, keg_volume: 25.0, glass: 0.5 },
-    { scale_factor: 3, stable_weight: 0,    stable_volume: 0,    pouring_volume: 0,   last_pour_volume: 0,   keg_volume: 0,    glass: 0 },
-    { scale_factor: 4, stable_weight: 0,    stable_volume: 0,    pouring_volume: 0,   last_pour_volume: 0,   keg_volume: 0,    glass: 0 }
+    {
+      scale_factor: 1,
+      stable_weight: 10.5,
+      stable_volume: 50.0,
+      pouring_volume: 5.0,
+      last_pour_volume: 3.0,
+      keg_volume: 30.0,
+      glass: 0.5
+    },
+    {
+      scale_factor: 2,
+      stable_weight: 8.0,
+      stable_volume: 40.0,
+      pouring_volume: 4.0,
+      last_pour_volume: 2.0,
+      keg_volume: 25.0,
+      glass: 0.5
+    },
+    {
+      scale_factor: 3,
+      stable_weight: 0,
+      stable_volume: 0,
+      pouring_volume: 0,
+      last_pour_volume: 0,
+      keg_volume: 0,
+      glass: 0
+    },
+    {
+      scale_factor: 4,
+      stable_weight: 0,
+      stable_volume: 0,
+      pouring_volume: 0,
+      last_pour_volume: 0,
+      keg_volume: 0,
+      glass: 0
+    }
   ],
   sensors: [{ id: 's1', temperature: 20.5 }],
   ha: { enabled: true },
@@ -62,8 +94,8 @@ const makeStatusJson = () => ({
   brewlogger: { url: '' },
   recent_events: [
     { unit: 0, name: 'pour_completed', timestamp_ms: 1000, data: { volume: 0.33 } },
-    { unit: 0, name: 'stable_level',   timestamp_ms: 2000, data: {} },
-    { unit: 1, name: 'keg_removed',    timestamp_ms: 500,  data: {} }
+    { unit: 0, name: 'stable_level', timestamp_ms: 2000, data: {} },
+    { unit: 1, name: 'keg_removed', timestamp_ms: 500, data: {} }
   ]
 })
 
@@ -223,7 +255,7 @@ describe('statusStore', () => {
   it('_convertWeight converts kg to lbs when config.isWeightLbs', () => {
     const configLbs = { isWeightLbs: true }
     const result = store._convertWeight(1, configLbs)
-    expect(parseFloat(result)).toBeCloseTo(2.20, 1)
+    expect(parseFloat(result)).toBeCloseTo(2.2, 1)
   })
 
   it('_convertWeight returns same value for kg', () => {

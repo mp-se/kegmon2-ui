@@ -73,7 +73,14 @@ describe('TapsBeerView', () => {
     config.brewfather_apikey = 'a'
     config.brewfather_userkey = 'u'
     const batches = [
-      { recipe: { name: 'R1' }, batchNo: 'bn1', measuredAbv: 5.1, estimatedIbu: 10, estimatedColor: 20, estimatedFg: 1 }
+      {
+        recipe: { name: 'R1' },
+        batchNo: 'bn1',
+        measuredAbv: 5.1,
+        estimatedIbu: 10,
+        estimatedColor: 20,
+        estimatedFg: 1
+      }
     ]
     const clickMock = vi.fn()
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ json: async () => batches }))
@@ -145,7 +152,12 @@ describe('TapsBeerView', () => {
     const wrapper = shallowMount(TapsBeerView, {
       global: {
         stubs: {
-          BsModalSelect: { name: 'BsModalSelect', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsModalSelect: {
+            name: 'BsModalSelect',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })
@@ -159,8 +171,18 @@ describe('TapsBeerView', () => {
     const wrapper = shallowMount(TapsBeerView, {
       global: {
         stubs: {
-          BsInputNumber: { name: 'BsInputNumber', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] },
-          BsInputText: { name: 'BsInputText', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsInputNumber: {
+            name: 'BsInputNumber',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          },
+          BsInputText: {
+            name: 'BsInputText',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })

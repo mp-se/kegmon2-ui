@@ -96,7 +96,12 @@ describe('IntBarhelperView', () => {
     const wrapper = shallowMount(IntBarhelperView, {
       global: {
         stubs: {
-          BsInputText: { name: 'BsInputText', template: '<div />', props: ['modelValue'], emits: ['update:modelValue'] }
+          BsInputText: {
+            name: 'BsInputText',
+            template: '<div />',
+            props: ['modelValue'],
+            emits: ['update:modelValue']
+          }
         }
       }
     })
