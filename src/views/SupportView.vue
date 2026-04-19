@@ -211,7 +211,6 @@
 <script setup>
 import { ref } from 'vue'
 import { status, config, global } from '@/modules/pinia'
-import { logDebug } from '@mp-se/espframework-ui-components'
 
 const logData = ref('')
 const showHelp = ref(false)
@@ -224,7 +223,6 @@ function fetchLog(file, callback) {
 
   config.sendFilesystemRequest(data, (success, text) => {
     if (success) {
-      logDebug('SupportView.fetchLog()', 'Fetching ' + file + ' completed')
       var list = text.split('\n')
       list.forEach(function (item) {
         if (item.length) logData.value = item + '\n' + logData.value

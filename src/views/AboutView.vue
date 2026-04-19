@@ -37,9 +37,7 @@
       use, and a separate Commercial License (see LICENSE and LICENSE_COMMERCIAL files).
     </p>
 
-    <p class="fw-normal">
-      Copyright (c) 2024-2026 Magnus. All rights reserved.
-    </p>
+    <p class="fw-normal">Copyright (c) 2024-2026 Magnus. All rights reserved.</p>
 
     <p class="fw-normal">
       Portions copyright (c) Magnus — https://github.com/mp-se/kegmon and
